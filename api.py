@@ -6,6 +6,7 @@ from requests import Session as RequestsSession
 from wsgiadapter import WSGIAdapter as RequestsWSGIAdapter
 from jinja2 import Environment, FileSystemLoader
 from whitenoise import WhiteNoise
+from middleware import Middleware
 
 
 class API:
@@ -22,8 +23,16 @@ class API:
 
         self.whitenoise = WhiteNoise(self.wsgi_app, root=static_dir)
 
+        self.middleware = Middleware(self)
+
     def __call__(self, environ, start_response):
-        return self.whitenoise(environ, start_response)
+        path_info = environ["PATH_INFO"]
+
+        if path_info.startswith("/static"):
+            environ["PATH_INFO"] = path_info[len("/static"):]
+            return self.whitenoise(environ, start_response)
+
+        return self.middleware(environ, start_response)
 
     def wsgi_app(self, environ, start_response):
         request = Request(environ)
@@ -33,14 +42,17 @@ class API:
         return response(environ, start_response)
 
     # Alternative route
-    def add_route(self, path, handler):
+    def add_route(self, path, handler, allowed_methods=None):
         assert path not in self.routes, "Such route already exists."
 
-        self.routes[path] = handler
+        if allowed_methods is None:
+            allowed_methods = ["get", "post", "put", "patch", "delete", "options"]
+
+        self.routes[path] = {"handler": handler, "allowed_methods": allowed_methods}
     
-    def route(self, path):
+    def route(self, path, allowed_methods=None):
         def wrapper(handler):
-            self.add_route(path, handler)
+            self.add_route(path, handler, allowed_methods)
             return handler
 
         return wrapper
@@ -52,10 +64,10 @@ class API:
 
     # Finding a handler
     def find_handler(self, request_path):
-        for path, handler in self.routes.items():
+        for path, handler_data in self.routes.items():
             parse_result = parse(path, request_path)
             if parse_result is not None:
-                return handler, parse_result.named
+                return handler_data, parse_result.named
 
         return None, None
 
@@ -63,13 +75,18 @@ class API:
     def handle_request(self, request):
         response = Response()
 
-        handler, kwargs = self.find_handler(request_path=request.path)
+        handler_data, kwargs = self.find_handler(request_path=request.path)
 
         try:
-            if handler is not None:
+            if handler_data is not None:
+                handler = handler_data["handler"]
+                allowed_methods = handler_data["allowed_methods"]
                 if inspect.isclass(handler):
                     handler = getattr(handler(), request.method.lower(), None)
                     if handler is None:
+                        raise AttributeError("Method not allowed", request.method)
+                else:
+                    if request.method.lower() not in allowed_methods:
                         raise AttributeError("Method not allowed", request.method)
 
                 handler(request, response, **kwargs)
@@ -101,3 +118,6 @@ class API:
     def add_exception_handler(self, exception_handler):
         self.exception_handler = exception_handler
     
+    # Add middleware
+    def add_middleware(self, middleware_cls):
+        self.middleware.add(middleware_cls)
