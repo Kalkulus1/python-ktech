@@ -134,7 +134,7 @@ Then you can use the files inside this folder in HTML files:
 
 ### Middleware
 
-You can create custom middleware classes by inheriting from the `bumbo.middleware.Middleware` class and overriding its two methods
+You can create custom middleware classes by inheriting from the `ktech_python.middleware.Middleware` class and overriding its two methods
 that are called before and after each request:
 
 ```python
