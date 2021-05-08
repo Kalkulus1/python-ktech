@@ -26,3 +26,11 @@ def tellage(request, response, name, age):
 def sum(request, response, num_1, num_2):
     total = int(num_1) + int(num_2)
     response.text = f"{num_1} + {num_2} = {total}"
+
+@app.route("/books")
+class BooksView:
+    def get(self, req, resp):
+        resp.text = "Books Page"
+
+    def post(self, req, resp):
+        resp.text = "Endpoint to create a book"
