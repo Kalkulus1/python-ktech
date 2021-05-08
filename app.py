@@ -1,5 +1,5 @@
-from python_ktech.api import API
-from python_ktech.middleware import Middleware
+from ktech_python.api import API
+from ktech_python.middleware import Middleware
 
 
 app = API()

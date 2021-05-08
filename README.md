@@ -1,14 +1,14 @@
-# Python_Ktech: Python Web Framework built for learning purposes.
+# Ktech_Python: Python Web Framework built for learning purposes.
 
 ![purpose](https://img.shields.io/badge/purpose-learning-green.svg)
-![PyPI](https://img.shields.io/pypi/v/python_ktech.svg)
+![PyPI](https://img.shields.io/pypi/v/ktech_python.svg)
 
 
-Python_Ktech is a Python web framework built for learning purposes.
+Ktech_Python is a Python web framework built for learning purposes.
 
 It's a WSGI framework and can be used with any WSGI application server such as Gunicorn.
 
-## Important packages python_ktech is built with
+## Important packages ktech_python is built with
 
 - gunicorn
 - webob
@@ -138,8 +138,8 @@ You can create custom middleware classes by inheriting from the `bumbo.middlewar
 that are called before and after each request:
 
 ```python
-from python_ktech.api import API
-from python_ktech.middleware import Middleware
+from ktech_python.api import API
+from ktech_python.middleware import Middleware
 
 
 app = API()

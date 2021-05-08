@@ -7,8 +7,8 @@ import os
 from setuptools import find_packages, setup
 
 # Package meta-data.
-NAME = "python_ktech"
-DESCRIPTION = "Python_Ktech: Python Web Framework built for learning purposes."
+NAME = "ktech_python"
+DESCRIPTION = "Ktech_Python: Python Web Framework built for learning purposes."
 EMAIL = "mumunim@gmail.com"
 AUTHOR = "Mumuni Mohammed"
 REQUIRES_PYTHON = ">=3.6.0"
