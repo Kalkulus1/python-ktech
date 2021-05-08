@@ -8,7 +8,7 @@ Ktech_Python is a Python web framework built for learning purposes.
 
 It's a WSGI framework and can be used with any WSGI application server such as Gunicorn.
 
-## Important packages ktech_python is built with
+## Important packages: ktech_python is built with
 
 - gunicorn
 - webob
@@ -21,7 +21,7 @@ It's a WSGI framework and can be used with any WSGI application server such as G
 ## Installation
 
 ```shell
-pip install python-ktech
+pip install ktech-python
 ```
 
 ## How to use it
@@ -29,7 +29,7 @@ pip install python-ktech
 ### Basic usage:
 
 ```python
-from bumbo.api import API
+from ktech_python.api import API
 
 app = API()
 
