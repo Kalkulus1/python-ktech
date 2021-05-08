@@ -8,6 +8,9 @@ A simple, fast, lightweight, production ready framework
 - gunicorn
 - webob
 - parse
+- pytest
+- requests-wsgi-adapter
+- pytest-cov
 
 
 ## Starter

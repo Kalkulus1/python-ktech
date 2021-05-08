@@ -1,0 +1,2 @@
+[run]
+omit = test_python_ktech.py,conftest.py,app.py
