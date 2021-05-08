@@ -15,6 +15,7 @@ A simple, fast, lightweight, production ready framework
 - requests-wsgi-adapter
 - pytest-cov
 - jinja2
+- whitenoise
 
 ## Starter
 <b>Covered the following features</b><br>
