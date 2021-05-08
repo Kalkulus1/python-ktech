@@ -6,7 +6,7 @@
 
 Ktech_Python is a Python web framework built for learning purposes.
 
-It's a WSGI framework and can be used with any WSGI application server such as Gunicorn.
+It is a WSGI framework and can be used with any WSGI application server such as Gunicorn.
 
 ## Important packages: ktech_python is built with
 
