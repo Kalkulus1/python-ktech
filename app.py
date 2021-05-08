@@ -34,3 +34,20 @@ class BooksView:
 
     def post(self, req, resp):
         resp.text = "Endpoint to create a book"
+
+
+# Testing Django based routes
+def handler(req, resp):
+    resp.text = "sample"
+
+app.add_route("/sample", handler)
+
+
+# Testing template route
+@app.route("/template")
+def template_handler(req, resp):
+    resp.body = app.template(
+        "index.html", 
+        context={"name": "Python-Ktech", 
+        "title": "Best Framework"}
+        ).encode()

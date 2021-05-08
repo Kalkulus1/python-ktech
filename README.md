@@ -2,6 +2,9 @@
 A simple, fast, lightweight, production ready framework
 
 
+## Framework Features
+- 
+
 
 ## Important packages
 
@@ -11,7 +14,7 @@ A simple, fast, lightweight, production ready framework
 - pytest
 - requests-wsgi-adapter
 - pytest-cov
-
+- jinja2
 
 ## Starter
 <b>Covered the following features</b><br>
